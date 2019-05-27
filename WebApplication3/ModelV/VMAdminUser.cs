@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication3.Models;
 
-namespace WebApplication3.VModel
+namespace WebApplication3.ModelV
 {
     public class VMAdminUser
     {

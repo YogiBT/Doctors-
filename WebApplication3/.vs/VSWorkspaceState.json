@@ -1,11 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\WebApplication3",
-    "\\WebApplication3\\Controllers",
-    "\\WebApplication3\\Views",
-    "\\WebApplication3\\Views\\User"
+    "\\DAL",
+    "\\Views",
+    "\\Views\\Home"
   ],
-  "SelectedNode": "\\WebApplication3\\Controllers\\UserController.cs",
+  "SelectedNode": "\\Views\\Home\\ShowHomePage.cshtml",
   "PreviewInSolutionExplorer": false
 }
