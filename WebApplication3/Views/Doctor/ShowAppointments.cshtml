@@ -1,0 +1,166 @@
+﻿
+@model WebApplication3.Models.Queue
+
+@{
+    ViewBag.Title = "ShowAppointments";
+    Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+}
+@*
+    show all appointments for current doctor.    
+
+*@
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+    }
+
+        .alert.success {
+            background-color: #4CAF50;
+        }
+
+        .alert.info {
+            background-color: #2196F3;
+        }
+
+        .alert.warning {
+            background-color: #ff9800;
+        }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .closebtn:hover {
+            color: black;
+        }
+</style>
+
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+<h2>Show Appointments</h2>
+
+<body>
+    Welcome Doctor! @Session["DoctorLoggedIn"]
+</body>
+<body>
+    <div>
+
+        @*
+            @foreach (var item in ViewBag.QueueList)
+            {
+                <tr>
+                    <td>@item.DID  </td>
+                    <td>@item.PID </td>
+                    <td>@item.date </td>
+                    <td>@item.mode </td>
+                    <td>
+                        @Html.ActionLink("Delete", "QueueDelete", new { date = item.date, DID = item.DID, mode = item.mode, PID = item.PID })|
+                        @Html.ActionLink("Info", "PatientInfo", new { id = item.PID })
+                    </td>
+
+                </tr>
+
+
+            }
+        *@
+
+
+        @{
+            if (Session["DuplicateQueue"] != null)
+            {
+                <h2>Alert Messages</h2>
+                <div class="alert">
+                    <span class="closebtn">&times;</span>
+                    <strong>Can't add queue,the reason:</strong>
+                    <br /><strong>*Already have an appoitment at this time!</strong>
+                </div>
+
+
+            }
+
+        }
+
+        @{
+            if (TempData["UnknownUser"] != null)
+            {
+                <h2>Alert Messages</h2>
+                <div class="alert">
+                    <span class="closebtn">&times;</span>
+                    <strong>Can't add queue,the reason:</strong>
+                    <br /><strong>@TempData["UnknownUser"]</strong>
+                </div>
+
+
+            }
+
+        }
+        <script>
+            var close = document.getElementsByClassName("closebtn");
+            var i;
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.opacity = "0";
+                    setTimeout(function () { div.style.display = "none"; }, 600);
+                }
+            }
+        </script>
+
+        
+            <table class="table">
+                <tr>
+                    <th>Doctor ID</th>
+                    <th>Patient ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                @foreach (var item in ViewBag.QueueList)
+                {
+                    <tr>
+                        <td>@item.DID  </td>
+                        <td>@item.PID </td>
+                        <td>@item.date </td>
+                        <td>@item.mode </td>
+                        <td>
+                            @Html.ActionLink("Delete", "QueueDelete", new { date = item.date, DID = item.DID, mode = item.mode, PID = item.PID })|
+                            @Html.ActionLink("Info", "PatientInfo", new { id = item.PID })
+                        </td>
+
+                    </tr>
+                }
+
+                    @*<tr ng-repeat="que in Queues">
+                <td>{{que.DID}}</td>
+                <td>{{que.PID}}</td>
+                <td>{{que.date}}</td>
+                <td>{{que.mode}}</td>
+
+
+            </tr>*@
+
+
+                </table>
+
+        </div>
+
+</body>
+

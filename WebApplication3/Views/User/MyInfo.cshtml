@@ -1,0 +1,43 @@
+﻿@model WebApplication3.Models.User
+
+@{
+    ViewBag.Title = "MyInfo";
+    Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+}
+@*
+show current user information.    
+*@
+<h2>MyInfo</h2>
+
+<div>
+    <br />
+    <table class="table">
+        <tr>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Age </th>
+            <th> ID </th>
+            <th> Phone </th>
+            <th> Email </th>
+        </tr>
+        @foreach (var item in ViewBag.TempUser)
+        {
+            <tr>
+                <td>@item.FirstName  </td>
+                <td>@item.LastName </td>
+                <td>@item.Age </td>
+                <td>@item.ID </td>
+                <td>@item.Phone </td>
+                <td>@item.Email </td>
+                <td></td>
+            </tr>
+
+        }
+
+
+
+
+    </table>
+
+
+</div>

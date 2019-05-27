@@ -1,0 +1,39 @@
+﻿@model WebApplication3.ModelV.VMAdmin
+
+@{
+    ViewBag.Title = "MyInfo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>MyInfo</h2>
+@*
+
+    show admin details    
+
+*@
+<body>
+    <head>
+        Welcome Admin:  @Session["AdminLoggedIn"]
+    </head>
+    <br />
+    AdminInfo:
+    <br />
+    <table class="table">
+        <tr>
+            <th> User Name </th>
+            
+
+        </tr>
+        @foreach (var item in Model.Admins)
+        {
+            <tr>
+                <td>@item.userName  </td>
+            </tr>
+        }
+
+
+
+
+    </table>
+    <br />
+

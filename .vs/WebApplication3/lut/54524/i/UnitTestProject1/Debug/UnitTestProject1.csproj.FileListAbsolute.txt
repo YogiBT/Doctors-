@@ -1,0 +1,9 @@
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\b\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\b\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\b\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\b\UnitTestProject1\bin\Debug\UnitTestProject1.dll.config
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\b\UnitTestProject1\bin\Debug\UnitTestProject1.dll
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\i\UnitTestProject1\Debug\UnitTestProject1.csprojAssemblyReference.cache
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\i\UnitTestProject1\Debug\UnitTestProject1.csproj.CoreCompileInputs.cache
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\i\UnitTestProject1\Debug\UnitTestProject1.csproj.CopyComplete
+C:\Users\YogiBT\Source\Repos\WebApplication3\.vs\WebApplication3\lut\0\i\UnitTestProject1\Debug\UnitTestProject1.dll

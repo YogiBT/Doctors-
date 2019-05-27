@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApplication3</name>
+    </assembly>
+    <members>
+        <member name="T:WebApplication3.Classes.Encryption">
+            <summary>
+            password encryption
+            </summary>
+        </member>
+        <member name="M:WebApplication3.Classes.Encryption.CreateHash(System.String)">
+            <summary>
+            get password as an input , building a random salt, using the password and the salt creates a hash .
+            </summary>
+            <param name="password"></param>
+            <returns>string converted</returns>
+        </member>
+        <member name="M:WebApplication3.Classes.Encryption.PBKDF2(System.String,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            returns the hash function        
+            /// </summary>
+            <param name="password"></param>
+            <param name="salt"></param>
+            <param name="pBKDF2_ITT"></param>
+            <param name="outputBytes"></param>
+            <returns>byte</returns>
+        </member>
+        <member name="M:WebApplication3.Classes.Encryption.SlowEquals(System.Byte[],System.Byte[])">
+            <summary>
+            checks if the password is the same char by char.
+            </summary>
+            <param name="dbHash"></param>
+            <param name="passHash"></param>
+            <returns>bool diff</returns>
+        </member>
+        <member name="M:WebApplication3.Classes.Encryption.ValidatePassword(System.String,System.String)">
+            <summary>
+            validate the password
+            </summary>
+            <param name="password"></param>
+            <param name="dbHash"></param>
+            <returns>bool slow hash</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:WebApplication3.Controllers.AdminController.ShowAllUsers" -->
+        <member name="M:WebApplication3.Controllers.AdminController.DeleteDoctor(System.String)">
+            <summary>
+            Method to delete doctor from DB.
+            </summary>
+            <param name="docID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.AdminController.ShowDoctors">
+            <summary>
+            Method to show doctors
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.AdminController.AddDoctor(WebApplication3.Models.Doctor)">
+            <summary>
+            Method to add new doctor to the DB.
+            </summary>
+            <param name="doc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.AdminController.ShowQueues">
+            <summary>
+            Method to show current doctors.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.AdminController.DeleteUser(System.String)">
+            <summary>
+            Method to delete a user from DB.
+            </summary>
+            <param name="usrID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.AdminController.AddUser(WebApplication3.Models.User)">
+            <summary>
+            add new user to DB.
+            </summary>
+            <param name="usr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.DoctorController.ShowAppointments">
+            <summary>
+            Method to show the doctor all the appointments
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.DoctorController.QueueDelete(System.DateTime,System.String,System.Boolean,System.String)">
+            <summary>
+            Method to delete a queue.
+            </summary>
+            <param name="date"></param>
+            <param name="did"></param>
+            <param name="mode"></param>
+            <param name="pid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.DoctorController.QueueAdd(WebApplication3.Models.Queue)">
+            <summary>
+            Method to add a queue.
+            </summary>
+            <param name="que"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.DoctorController.PatientInfo(System.String)">
+            <summary>
+            Method to show user info from queue table.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.DoctorController.MyInfo">
+            <summary>
+            Method to show current doctor information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.DoctorController.Edit">
+            <summary>
+            Method to edit the doctor information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.HomeController.LogOut">
+            <summary>
+            Method to logot and return homepage.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.HomeController.Submit">
+            <summary>
+            Submit method, enter details and validate.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.HomeController.LogIn">
+            <summary>
+            Redirect to login view.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.HomeController.ShowHomePage">
+            <summary>
+            Redirect to homepage view.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.HomeController.About">
+            <summary>
+            Redirect to 'about' view.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.UserController.Submit(WebApplication3.Models.User)">
+             <summary>
+            This part open the connection to DB and insert+save a new user in dbo.tblLoggers DB
+             </summary>
+             <param name="usr"></param>
+             <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.UserController.FindAppointment">
+            <summary>
+            Method to find appointment
+            </summary>
+        </member>
+        <member name="M:WebApplication3.Controllers.UserController.ViewAppointments">
+            <summary>
+            method to show appointments for user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.UserController.QueueSelect(System.DateTime,System.String)">
+            <summary>
+            Add appointment to queue list
+            </summary>
+            <param name="date"></param>
+            <param name="did"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.UserController.MyInfo">
+            <summary>
+            Personal info.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.Controllers.UserController.verifyUser">
+            <summary>
+            Method to verify user.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication3.DAL.AdminDAL.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            Create a connection to admin DB.
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="M:WebApplication3.DAL.DoctorDAL.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            Create a connection to doctor DB.
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="M:WebApplication3.DAL.QueueDAL.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            Create a connection to queue DB.
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="M:WebApplication3.DAL.UserDAL.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            Create a connection to users DB.
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+    </members>
+</doc>

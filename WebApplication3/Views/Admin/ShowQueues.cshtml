@@ -1,0 +1,81 @@
+﻿@model WebApplication3.ModelV.VMQueue
+
+@{
+    ViewBag.Title = "ShowQueues";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*
+
+    show queues using WebGrid.
+
+*@
+
+
+<style type="text/css">
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #2cabea;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #2cabea;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #0c5a81;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #aadff9;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h2>ShowQueues</h2>
+
+
+<body>
+    <head>
+        Welcome Admin @Session["AdminLoggedIn"]
+    </head>
+    <br />
+    Queues:
+    <br />
+    @{
+        WebGrid wg = new WebGrid(Model.queues);
+    }
+    @wg.GetHtml(
+        tableStyle: "webgrid-table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+        mode: WebGridPagerModes.All,
+        columns:
+            wg.Columns(
+            wg.Column(columnName: "Appointment time", header: "date", format: @<text>@item.date</text>),
+                            wg.Column(columnName: "Doctor", header: "DID", format: @<text>@item.DID</text> ),
+                                            wg.Column(columnName: "Mode", header: "mode", format: @<text>@item.mode</text>),
+                                                            wg.Column(columnName: "Patient", header: "PID", format: @<text>@item.PID</text>)
+                                                                                   ))
+
+</body>
+

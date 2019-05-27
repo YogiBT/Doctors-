@@ -1,0 +1,18 @@
+﻿@model WebApplication3.ModelV.VMQueue
+
+@{
+    ViewBag.Title = "ViewAppointments";
+    Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+}
+@*
+show appoitnments using partial view.    
+*@
+<h2>View Appointments</h2>
+
+<body>
+    <div>
+      @Html.Partial("ShowAppointment",Model)
+
+    </div>
+    <h1> Using Partial</h1>
+</body>

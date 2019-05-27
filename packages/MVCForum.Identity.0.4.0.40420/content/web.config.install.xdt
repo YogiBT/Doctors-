@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+	<mvcForum>
+		<databaseBuilder type="[YourRootNamespace].MvcForumIdentity.IdentityBuilder, [YourAssembly]" xdt:Transform="Replace" />
+		<membershipServiceComponent type="[YourRootNamespace].MvcForumIdentity.MembershipService, [YourAssembly]" xdt:Transform="Replace" />
+		<formsAuthenticationComponent type="[YourRootNamespace].MvcForumIdentity.AuthenticationService, [YourAssembly]" xdt:Transform="Replace" />
+		<userProviderComponent type="[YourRootNamespace].MvcForumIdentity.IdentityUserProvider, [YourAssembly]" xdt:Transform="Replace" />
+	</mvcForum>
+	<system.web>
+		<membership xdt:Transform="Remove" />
+		<roleManager xdt:Transform="Remove" />
+	</system.web>
+
+</configuration>

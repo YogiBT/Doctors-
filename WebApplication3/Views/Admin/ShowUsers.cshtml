@@ -1,0 +1,184 @@
+﻿@model WebApplication3.Models.User
+
+@{
+    ViewBag.Title = "ShowUsers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*
+
+    show users using Jquery and validation.
+
+*@
+
+
+<h2>ShowUsers</h2>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+    }
+
+        .alert.success {
+            background-color: #4CAF50;
+        }
+
+        .alert.info {
+            background-color: #2196F3;
+        }
+
+        .alert.warning {
+            background-color: #ff9800;
+        }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .closebtn:hover {
+            color: black;
+        }
+</style>
+
+
+
+
+<body>
+    Welcome Admin! @Session["AdminLoggedIn"]
+</body>
+<body>
+    <div>
+        <table class="table">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>ID</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+            @foreach (var item in ViewBag.UsersList)
+            {
+                <tr>
+                    <td>@item.FirstName  </td>
+                    <td>@item.LastName </td>
+                    <td>@item.Age</td>
+                    <td>@item.ID </td>
+                    <td>@item.Phone </td>
+                    <td>@item.Email </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteUser", new { usrID = item.ID })
+                    </td>
+
+                </tr>
+
+
+            }
+
+
+        </table>
+
+        <script src="~/Scripts/jquery-3.3.1.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+        @{
+            if (TempData["DuplicateUser"] != null)
+            {
+                <h2>Alert Messages</h2>
+                <div class="alert">
+                    <span class="closebtn">&times;</span>
+                    <strong>Already have a user id like that!</strong>
+                </div>
+
+
+            }
+
+        }
+        <script>
+            var close = document.getElementsByClassName("closebtn");
+            var i;
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.opacity = "0";
+                    setTimeout(function () { div.style.display = "none"; }, 600);
+                }
+            }
+        </script>
+
+
+        <body>
+            <div>
+                @using (Html.BeginForm("AddUser", "Admin", FormMethod.Post))
+                {
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <i>First Name </i>
+                                @Html.TextBoxFor(m => m.FirstName) @Html.ValidationMessageFor(x => x.FirstName)
+                            </td>
+                            <td>
+                                <i>Last Name</i>
+                                @Html.TextBoxFor(m => m.LastName) @Html.ValidationMessageFor(x => x.LastName)
+                            </td>
+                            <td>
+                                <i>ID</i>
+                                @Html.TextBoxFor(m => m.ID) @Html.ValidationMessageFor(x => x.ID)
+                            </td>
+                            <td>
+                                <i>Phone</i>
+                                @Html.TextBoxFor(m => m.Phone) @Html.ValidationMessageFor(x => x.Phone)
+                            </td>
+                            <td>
+                                <i>Age</i>
+                                @Html.TextBoxFor(m => m.Age) @Html.ValidationMessageFor(x => x.Age)
+                            </td>
+                            <td>
+                                <i>Password</i>
+                                @Html.TextBoxFor(m => m.Password) @Html.ValidationMessageFor(x => x.Password)
+                            </td>
+                            <td>
+                                <i>Email</i>
+                                @Html.TextBoxFor(m => m.Email) @Html.ValidationMessageFor(x => x.Email)
+                            </td>
+                        </tr>
+                    </table>
+                    <input id="Submit1" type="submit" value="Add User" />
+                }
+
+                @Html.ValidationSummary()
+
+
+
+
+
+            </div>
+        </body>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</body>

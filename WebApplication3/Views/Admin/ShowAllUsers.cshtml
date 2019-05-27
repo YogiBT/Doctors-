@@ -1,0 +1,105 @@
+﻿@model WebApplication3.ModelV.VMUsersDoctors
+
+@{
+    ViewBag.Title = "ShowAllUsers";
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*
+    show all current doctors and user to admin using WebGrid.    
+
+*@
+
+<style type="text/css">
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #2cabea;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #2cabea;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #0c5a81;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #aadff9;
+        padding: 3px 7px 2px;
+    }
+</style>
+<h2>ShowUsers & Doctors </h2>
+
+<body>
+    <head>
+        Welcome Admin @Session["AdminLoggedIn"]
+    </head>
+    <br />
+    Users:
+    <br />
+    @{
+        WebGrid wg = new WebGrid(Model.users);
+    }
+    @wg.GetHtml(
+tableStyle: "webgrid-table",
+headerStyle: "webgrid-header",
+footerStyle: "webgrid-footer",
+alternatingRowStyle: "webgrid-alternating-row",
+selectedRowStyle: "webgrid-selected-row",
+rowStyle: "webgrid-row-style",
+mode: WebGridPagerModes.All,
+columns:
+wg.Columns(
+wg.Column(columnName: "First Name", header: "FirsName", format: @<text>@item.FirstName</text>),
+                             wg.Column(columnName: "Last Name", header: "LastName", format: @<text>@item.LastName</text> ),
+                                                      wg.Column(columnName: "Age", header: "Age", format: @<text>@item.Age</text>),
+                                                                             wg.Column(columnName: "ID", header: "ID", format: @<text>@item.ID</text>),
+                                                            wg.Column(columnName: "Email", header: "Email", format: @<text>@item.Email</text>)
+                                                                                                                               ))
+    <br />
+    Doctors:
+    <br />
+    @{
+        WebGrid wg2 = new WebGrid(Model.doctors);
+
+    }
+
+
+    @wg2.GetHtml(
+tableStyle: "webgrid-table",
+headerStyle: "webgrid-header",
+footerStyle: "webgrid-footer",
+alternatingRowStyle: "webgrid-alternating-row",
+selectedRowStyle: "webgrid-selected-row",
+rowStyle: "webgrid-row-style",
+mode: WebGridPagerModes.All,
+columns:
+wg.Columns(
+wg.Column(columnName: "First Name", header: "FirsName", format: @<text>@item.FirstName</text>),
+                             wg.Column(columnName: "Last Name", header: "LastName", format: @<text>@item.LastName</text> ),
+                                                      wg.Column(columnName: "Age", header: "Age", format: @<text>@item.Age</text>),
+                                                                             wg.Column(columnName: "ID", header: "DID", format: @<text>@item.DID</text>),
+                                wg.Column(columnName: "Email", header: "Email", format: @<text>@item.Email</text>)
+                                                                                                                       ))
+
+
+</body>

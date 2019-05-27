@@ -1,0 +1,52 @@
+﻿@model WebApplication3.Models.Doctor
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+}
+
+@*
+    edit currrent doctor details    
+*@
+
+<h1>Welcome Doctor @Session["DoctorLoggedIn"]</h1>
+<h2>Edit</h2>
+<h3>Enter new details</h3>
+<body>
+    <div>
+        @using (Html.BeginForm("Submit", "Doctor", FormMethod.Post))
+        {
+            <i>First Name </i>
+            @Html.TextBoxFor(m => m.FirstName) @Html.ValidationMessageFor(x => x.FirstName)
+            <br />
+            <i>Last Name</i>
+            @Html.TextBoxFor(m => m.LastName) @Html.ValidationMessageFor(x => x.LastName)
+            <br />
+            <i>ID</i>
+            @Html.TextBoxFor(m => m.DID) @Html.ValidationMessageFor(x => x.DID)
+            <br />
+
+            <i>Phone</i>
+            @Html.TextBoxFor(m => m.Phone) @Html.ValidationMessageFor(x => x.Phone)
+            <br />
+            <i>Age</i>
+            @Html.TextBoxFor(m => m.Age) @Html.ValidationMessageFor(x => x.Age)
+            <br />
+            <i>Password</i>
+            @Html.TextBoxFor(m => m.Password) @Html.ValidationMessageFor(x => x.Password)
+            <br />
+            <i>Email</i>
+            @Html.TextBoxFor(m => m.Email) @Html.ValidationMessageFor(x => x.Email)
+            <br />
+
+
+
+
+
+
+
+
+            <input id="Submit1" type="submit" value="Edit" />
+        }
+
+        @Html.ValidationSummary()

@@ -1,0 +1,223 @@
+﻿@model WebApplication3.Models.Queue
+
+@{
+    ViewBag.Title = "AddQueue";
+    Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+}
+@*
+
+    add new queue to DB using angular assychronic
+
+*@
+
+<h2>AddQueue</h2>
+
+<body>
+    Welcome Doctor! @Session["DoctorLoggedIn"]
+</body>
+<body>
+    <div>
+
+
+        @{
+            if (Session["DuplicateQueue"] != null)
+            {
+                <h2>Alert Messages</h2>
+                <div class="alert">
+                    <span class="closebtn">&times;</span>
+                    <strong>Can't add queue,the reason:</strong>
+                    <br /><strong>*Already have an appoitment at this time!</strong>
+                </div>
+
+
+            }
+
+        }
+
+        @{
+            if (TempData["UnknownUser"] != null)
+            {
+                <h2>Alert Messages</h2>
+                <div class="alert">
+                    <span class="closebtn">&times;</span>
+                    <strong>Can't add queue,the reason:</strong>
+                    <br /><strong>@TempData["UnknownUser"]</strong>
+                </div>
+
+
+            }
+
+        }
+        <script>
+            var close = document.getElementsByClassName("closebtn");
+            var i;
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.opacity = "0";
+                    setTimeout(function () { div.style.display = "none"; }, 600);
+                }
+            }
+        </script>
+
+    </div>
+
+</body>
+
+
+
+
+<script src="~/Scripts/angular.js"></script>
+<script>
+    var app = angular.module("myQueue", []);
+    app.controller("QueueViewModel", function ($scope,$http) {
+
+        app.filter("mydate", function () {
+            var re = /\Date\(([0-9]*)\)\//;
+            return function (x) {
+                var m = x.match(re);
+                if (m) return new Date(parseInt(m[1]));
+                else return null;
+            };
+        });
+            
+        $scope.Queue = {
+            "DID": "",
+            "date": "",
+            "PID": "",
+            "mode": "",
+            "modeColor": ""
+        };
+
+        $scope.getColor = function (mode) {
+            if (mode == "") return "Green";
+            else if (mode == "true") return "Green";
+            else return "Red";
+        };
+
+        $scope.datalist = {};
+
+        //$scope.QueueView = { "Color": ""};
+
+        $scope.$watch("Queue.mode", function () {
+            $scope.Queue.modeColor = $scope.getColor($scope.Queue.mode);
+
+        });
+        @*
+        $scope.Add = function () {
+            $http({ method: "POST", data: $scope.Queue, url: "QueueAdd" }).
+                success(function (data, status, headers, config) {
+                    $scope.Queue = {
+                        "DID": "",
+                        "date": "",
+                        "PID": "",
+                        "mode": "",
+                        "modeColor": ""
+                    };
+
+                });
+        };
+            *@
+        $scope.Add = function () {
+            $http({ method: "POST", data: $scope.Queue, url: "QueueAdd" }).then(function (response) {
+                    data = response.data;
+                    $scope.datalist = data;
+                    $scope.Queue = {
+                        "DID": "",
+                        "date": "",
+                        "PID": "",
+                        "mode": "",
+                        "modeColor": ""
+                    };
+
+                }, function (error) {
+
+                    console.log(error, "error queue");
+
+                });
+
+        };
+        $scope.Load = function () {
+            $http({ method: "GET", data: $scope.Queue, url: "GetQueuesByJson" }).then(function (response) {
+                data = response.data;
+                $scope.datalist = data;
+            });
+        } 
+        $scope.Load();
+    });
+
+</script>
+
+
+<html>
+<body ng-app="myQueue">
+    <div>
+        <div ng-controller="QueueViewModel">
+            <form id="frmAdd">
+                <table class="table">
+                    <tr>
+                        <td>
+                            DID ->
+                            <input id="DID" ng-model="Queue.DID" type="text" />
+                        </td>
+
+                        <td>
+                            date ->
+                            <input id="date" ng-model="Queue.date" type="text" />
+                        </td>
+
+                        <td>
+                            mode ->
+                            <input id="mode" ng-model="Queue.mode" style="background-color:{{Queue.modeColor}}" type="text" />
+                        </td>
+                        <td>
+                            PID ->
+                            <input id="PID" ng-model="Queue.PID" type="text" />
+                        </td>
+
+                    </tr>
+
+                </table>
+
+
+            </form>
+            <input id="Button1" type="button" value="Add Queue" ng-click="Add()" />
+            <br />
+
+            <table class="table">
+                <tr>
+                    <th>Doctor ID</th>
+                    <th>Patient ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                <tr ng-repeat="que in datalist">
+                    <td>{{que.DID}}</td>
+                    <td>{{que.PID}}</td>
+                    @* <td>{{$scope.que.date | mydate | date: 'yyyy-MM-dd HH:mm'}}</td> *@
+                    <td>{{que.date.slice(6,-2) | date: 'dd-MM-yyyy HH:mm'}}</td>
+                    @*<td>{{que.date}}</td>*@
+                    <td>{{que.mode}}</td>
+
+
+                </tr>
+
+                @*<tr ng-repeat="que in Queues">
+                <td>{{que.DID}}</td>
+                <td>{{que.PID}}</td>
+                <td>{{que.date}}</td>
+                <td>{{que.mode}}</td>
+
+
+            </tr>*@
+
+
+            </table>
+        </div>
+    </div>
+</body>
+
+
+
+</html>
