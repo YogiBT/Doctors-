@@ -1,0 +1,39 @@
+﻿@model WebApplication3.ModelV.VMQueue
+
+@{
+    ViewBag.Title = "ShowAppointment";
+    //Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+}
+@*
+show all appointments.    
+*@
+<body>
+    <div>
+        <table class="table">
+            @foreach (var item in Model.queues)
+            {
+                <tr>
+
+                    <td>
+                        @item.PID
+                    </td>
+                    <td>@item.DID</td>
+                    <td>@item.date</td>
+                    <td>@item.mode</td>
+                    <td>
+                        QueueSelect
+                        @if (@item.PID == null)
+                        {
+                            
+                            @Html.ActionLink("Select Queue", "QueueSelect", new { date = item.date, DID = item.DID })
+                        }
+                    </td>
+                </tr>
+
+
+            }
+
+        </table>
+
+    </div>
+</body>

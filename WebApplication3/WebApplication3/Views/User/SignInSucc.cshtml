@@ -1,0 +1,22 @@
+﻿@model WebApplication3.Models.User
+
+@{
+    ViewBag.Title = "SignInSucc";
+    Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+}
+@*
+    success view after signing in.    
+*@
+<h2>SignIn Success</h2>
+
+<body>
+    <div>
+
+        Wellcome @Session["UserLoggedIn"]
+        <br />
+        Success!
+        <br />
+        
+    </div>
+</body>
+

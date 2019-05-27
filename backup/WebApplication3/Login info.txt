@@ -1,0 +1,23 @@
+Login info:
+
+admin:
+username: admin
+password: admin
+
+doctors:
+
+username: doc1
+password: doc1
+
+username: doc2
+password: doc2
+
+users:
+
+username: user1
+password: user1
+.
+.
+.
+username: user8
+password: user8
