@@ -7,7 +7,8 @@ using WebApplication3.Classes;
 using WebApplication3.DAL;
 using WebApplication3.Models;
 using WebApplication3.ModelV;
-using CaptchaMvc.HtmlHelpers;
+
+
 namespace WebApplication3.Controllers
 {
 
@@ -55,7 +56,7 @@ namespace WebApplication3.Controllers
             string txtID = Request.Form["txtID"].ToString();
             string txtPassword = Request.Form["txtPassword"].ToString();
             Encryption enc = new Encryption();
-            if (!ModelState.IsValid && this.IsCaptchaValid("Wrong! you ROBOT!"))
+            if (!ModelState.IsValid)
             {
                 Session["WarningMessage"] = "Wrong Username or Password !";
                 return View("ShowHomePage", "Home");
@@ -131,7 +132,6 @@ namespace WebApplication3.Controllers
         /// Redirect to homepage view.
         /// </summary>
         /// <returns></returns>
-        [RequireHttps]
         public ActionResult ShowHomePage()
         {
             return View();
@@ -144,8 +144,9 @@ namespace WebApplication3.Controllers
         public ActionResult About()
         {
             //PieChartInsert();
-            
-
+            TermsDAL tdm = new TermsDAL();
+            List<uTerms> usr = tdm.theTerms.ToList<uTerms>();
+            ViewBag.Terms = usr;
             return View();
         }
 
@@ -154,12 +155,6 @@ namespace WebApplication3.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        public ActionResult Forum()
-        {
-             return Redirect("http://localhost:1333");
-            //return Redirect("http://WebApplication3Forum/forum");
         }
     }
 }

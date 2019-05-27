@@ -8,7 +8,7 @@ using WebApplication3.Models;
 using WebApplication3.ModelV;
 using WebApplication3.Classes;
 
-
+/*Integrated Security=True*/
 namespace WebApplication3.Controllers
 {
     public class AdminController : Controller
@@ -30,18 +30,6 @@ namespace WebApplication3.Controllers
             DoctorDAL dalDoc = new DoctorDAL();
             VMUsersDoctors vm = new VMUsersDoctors(dalDoc.Doctors.ToList<Doctor>(), dalUser.Users.ToList<User>());
 
-            return View(vm);
-
-        }
-        public ActionResult ShowAllUsers2(VMUsersDoctors vm)
-        {
-            //if (verifyAdmin() == false)
-            //{
-            //    TempData["WarningMessage"] = "Don't go to places you are not allowed.";
-
-            //    return RedirectToAction("LogOut", "Home");
-            //}
-            
             return View(vm);
 
         }
