@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@Scripts.Render("~/bundles/bootbox")
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,9 +7,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <img class="headerLogo" src="@Url.Content("~/images/layoutLogo.jpg")" alt="Image Logo"  />
+    <img class="headerLogo" src="@Url.Content("~/images/layoutLogo.jpg")" alt="Image Logo" />
 </head>
-
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -20,7 +20,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("NAV-BAR", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -29,16 +29,15 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("LogIn", "LogIn", "Home")</li>
                     <li>@Html.ActionLink("SignIn", "Enter", "User")</li>
-                    <li>@Html.ActionLink("Forum", "Forum", "Home")</li>
 
                 </ul>
             </div>
         </div>
 
     </div>
-    
-                @* <img class="info" src="@Url.Content("~/images/SatisfactionModel.png")" alt="Info" width="250" height="250" /> *@
-    
+
+    @* <img class="info" src="@Url.Content("~/images/SatisfactionModel.png")" alt="Info" width="250" height="250" /> *@
+
     <div class="container body-content">
         @RenderBody()
         <hr />

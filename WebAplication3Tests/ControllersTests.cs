@@ -10,7 +10,7 @@ using WebApplication3.Models;
 using WebApplication3.Classes;
 using WebApplication3.DAL;
 using WebApplication3.ModelV;
-using WebApplication3.VModel;
+
 
 using System.Web;
 using FakeHttpContext;
@@ -40,20 +40,6 @@ namespace WebAplication3Tests
         }
         */
         [TestMethod]
-        public void MyInfoAdmin()
-        {
-            //arrange
-            AdminController controller = new AdminController();
-
-            //act
-            ViewResult result = controller.MyInfo() as ViewResult;
-
-            //assert
-            Assert.AreEqual("MyInfo", result.ViewBag.Title);
-
-        }
-
-        [TestMethod]
         public void ShowHomePage()
         {
             //arrange
@@ -67,8 +53,6 @@ namespace WebAplication3Tests
 
 
         }
-
-
 
         [TestMethod]
         public void Index()
@@ -144,19 +128,13 @@ namespace WebAplication3Tests
 
         }
 
-        
+        /*
         [TestMethod]
         public void showAllUsers()
         {
             //arrange
             AdminController controller = new AdminController();
-            /*UserDAL dalUser = new UserDAL();
-            DoctorDAL dalDoc = new DoctorDAL();
-            VMUsersDoctors vm = new VMUsersDoctors(dalDoc.Doctors.ToList<Doctor>(), dalUser.Users.ToList<User>());
 
-            //act
-            ViewResult result = controller.ShowAllUsers2(vm) as ViewResult;
-            */
             //act
             ViewResult result = controller.ShowAllUsers() as ViewResult;
 
@@ -165,7 +143,7 @@ namespace WebAplication3Tests
 
 
         }
-        
+        */
 
         /*
         [TestMethod]

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WebApplication3.Models.uTerms
+@{
     ViewBag.Title = "About";
     if (Session["UserLoggedIn"] != null)
     {
@@ -21,7 +22,15 @@
     Our goal is to connect the doctor directly to the client.<br />
     Allowing express serivce to everyone.<br />
 <p>The website is in building status , much more to come.</p>
-        
+
+<p>
+    @foreach (var item in ViewBag.Terms)
+    {
+
+        <td>@item.UserTerms  </td>
+    }
+</p>
+
 
 
 
