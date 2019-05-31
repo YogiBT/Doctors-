@@ -12,21 +12,21 @@ namespace WebApplication3.ModelV
 {
     public class MessageReplyViewModel
     {
-        
 
-        public List<MessageReply>_replies { get; set; }
+
+        private List<MessageReply> _replies = new List<MessageReply>();
         public Reply Reply { get; set; }
 
         public Message Message { get; set; }
-
-        public List<MessageReply> Replies
+        
+        public List<MessageReply> Replies 
         {
-            get { return _replies; }
-            set { _replies = value; }
+             get { return _replies; }
+             set { _replies = value; }
         }
 
         public PagedList.IPagedList<Message> Messages { get; set; }
-
+        
         public class MessageReply
         {
             public int Id { get; set; }
@@ -38,6 +38,11 @@ namespace WebApplication3.ModelV
             public DateTime ReplyDateTime { get; set; }
         }
 
-
+    /*
+        public MessageReplyViewModel(Message msg1, Reply rep1)
+        {
+            Reply = rep1;
+            Message = msg1;
+        }*/
     }
 }

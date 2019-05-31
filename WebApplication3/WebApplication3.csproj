@@ -205,6 +205,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Classes\Encryption.cs" />
+    <Compile Include="Classes\SHA256Imp.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\ForumController.cs" />

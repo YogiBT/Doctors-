@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 using System.Web;
-
+using WebApplication3.Classes;
 namespace WebApplication3.Classes
 {
     /// <summary>
@@ -21,14 +23,44 @@ namespace WebApplication3.Classes
         /// <returns>string converted</returns>
         public string CreateHash(string password)
         {
+            string newHash;
+            string newHash2;
             RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
             byte[] salt = new byte[SALT_SIZE]; // random salt 
             csprng.GetBytes(salt);
 
+            //  byte[] byteArray = Encoding.ASCII.GetBytes(password);
+            // MemoryStream stream = new MemoryStream(byteArray);
+            // MemoryStream s1 = GenerateStreamFromString(password); 
+            /* using (var stream = GenerateStreamFromString(password))
+             {
+
+                 List<byte> temp = SHA256Imp.Hash(stream);
+
+                 newHash = ArrayToString(temp);
+
+
+                 Clear(stream);
+             }*/
+            //s1.Close();
+            //s1.Dispose();
+
+
+
+            //byte[] salt = Convert.(newHash);
+            SHA256Imp hasher1 = new SHA256Imp();
+            
+            List<byte> temp = hasher1.Hash(password);
+
+            newHash = ArrayToString(temp);
+          /*  SHA256Imp hasher2 = new SHA256Imp();
+            List<byte> temp2 = hasher2.Hash(password);
+
+            newHash2 = ArrayToString(temp2);*/
 
             byte[] hash = PBKDF2(password, salt, PBKDF2_ITT,HASH_SIZE);
 
-            return Convert.ToBase64String(salt) + ":" + Convert.ToBase64String(hash);
+            return Convert.ToBase64String(salt) + ":" + Convert.ToBase64String(hash) + ":" + newHash;
         }
 
 
@@ -74,12 +106,51 @@ namespace WebApplication3.Classes
             char[] delimiter = { ':' };
             string[] split = dbHash.Split(delimiter);
             byte[] salt = Convert.FromBase64String(split[0]);
-            byte[] hash = Convert.FromBase64String(split[1]);
+            byte[] hash = Convert.FromBase64String(split[1]); 
+            string sha256 = split[2];
+           /* byte[] byteArray = Encoding.ASCII.GetBytes(password);
+            MemoryStream stream = new MemoryStream(byteArray);
+            List<byte> temp = SHA256Imp.Hash(stream);
 
+            string newHash = ArrayToString(temp);*/
+            SHA256Imp s = new SHA256Imp();
+            //s.ValidatePassword(password, salt2);
+       
             byte[] hashToValidate = PBKDF2(password, salt, PBKDF2_ITT, hash.Length);
-
-            return SlowEquals(hash, hashToValidate);
+            if (SlowEquals(hash, hashToValidate) == true && s.ValidatePassword(password, sha256) == true)
+                return true;
+            else
+                return false;
         }
+        public string ArrayToString(List<byte> arr)
+        {
+            StringBuilder s = new StringBuilder(arr.Count * 2);
+            for (int i = 0; i < arr.Count; ++i)
+            {
+                s.AppendFormat("{0:x}", arr[i]);
+            }
 
+            return s.ToString();
+        }
+        public static MemoryStream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            
+            
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            stream.SetLength(0);
+
+            return stream;
+        }
+        public static void Clear(MemoryStream source)
+        {
+            byte[] buffer = source.GetBuffer();
+            Array.Clear(buffer, 0, buffer.Length);
+            source.Position = 0;
+            source.SetLength(0);
+        }
     }
 }

@@ -15,10 +15,11 @@
     }
 }
 @*
-    homepage.    
+    homepage.
 *@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
     .alert {
         padding: 20px;
         background-color: #f44336;
@@ -55,7 +56,6 @@
             color: black;
         }
 </style>
-
 @{
     if (TempData["WarningMessage"] != null)
     {
@@ -69,20 +69,33 @@
     }
 
 }
-<script>
-            var close = document.getElementsByClassName("closebtn");
-            var i;
+@{
+    if (Session["WarningMessage"] != null)
+    {
+        <h2>Alert Messages</h2>
+        <div class="alert">
+            <span class="closebtn">&times;</span>
+            <strong>@Session["WarningMessage"]</strong>
+        </div>
 
-            for (i = 0; i < close.length; i++) {
-                close[i].onclick = function () {
-                    var div = this.parentElement;
-                    div.style.opacity = "0";
-                    setTimeout(function () { div.style.display = "none"; }, 600);
-                }
-            }
+
+    }
+
+}
+
+<script>
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function () { div.style.display = "none"; }, 600);
+        }
+    }
 </script>
 <h5>Welcome!!</h5>
-
 <body>
     <div>
         Feel free to navigate in this amazing grid

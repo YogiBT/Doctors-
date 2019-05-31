@@ -61,6 +61,7 @@ namespace WebApplication3.Controllers
                 {
                     foreach (var rep in replies)
                     {
+                        /* MessageReplyViewModel.MessageReply reply = new MessageReplyViewModel.MessageReply();*/
                         MessageReplyViewModel.MessageReply reply = new MessageReplyViewModel.MessageReply();
                         reply.MessageId = rep.MessageId;
                         reply.Id = rep.Id;

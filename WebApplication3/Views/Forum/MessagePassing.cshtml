@@ -2,7 +2,6 @@
 @using PagedList;
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
 Page @ViewBag.PageNumber of @ViewBag.TotalPages
 @Html.PagedListPager((IPagedList)ViewBag.MessagesInOnePage, page => Url.Action("MessagePassing", new { page }))
 <script>
@@ -34,12 +33,10 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
 </script>
 <h2>MessagePassing</h2>
 
-
 <div class="form-group">
-    @using (Html.BeginForm("DeleteMessage", "Message", FormMethod.Post, new { @id = "form-message-delete", @class = "form-horizontal container" }))
+    @using (Html.BeginForm("DeleteMessage", "Forum", FormMethod.Post, new { @id = "form-message-delete", @class = "form-horizontal container" }))
     {
         <div class="col-sm-12">
-
             <!-- table  -->
             <table id="table-message-reply" class="table table-condensed table-striped table-message-reply">
                 <thead>
@@ -51,7 +48,6 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                         <th></th>
                     </tr>
                 </thead>
-
                 @foreach (var m in Model.Messages)
                 {
                     string selectedRow = "";
@@ -63,7 +59,6 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                         <td>
                             <div class="text">@m.Subject</div>
                         </td>
-
                         <td>
                             <div class="text">@m.From</div>
                         </td>
@@ -75,21 +70,31 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                         </td>
                         <td>
                             <div class="text edit">
-                                <a class="delete" href="#" title="delete" onclick="messageDelete(@m.Id)"></a>
+                                <a class="delete" href="#" title="delete" onclick="messageDelete(@m.Id)"><img style="width: 17px; height: 15px" src="~/images/no.png"/></a>
                             </div>
                         </td>
                         <td><input type="hidden" id="messageId" name="messageId" value="@m.Id"></td>
                     </tr>
-                   
+
                 }
             </table>
             Page @ViewBag.PageNumber of @ViewBag.TotalPages   @Html.PagedListPager((IPagedList)ViewBag.MessagesInOnePage, page => Url.Action("MessagePassing", new { page }))
 
-
         </div>
     }
 </div>
+<span><b>Message Details: </b></span>
+@foreach (var item in Model.Messages)
+{
+    if (item.Id == ViewBag.MessageId)
+    {
 
+        @item.MessageToPost
+
+
+    }
+
+}
 @if (Model.Replies != null && ViewBag.MessageId != null)
 {
     <div class="panel panel-default">
@@ -99,17 +104,13 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
             </h3>
         </div>
         <div class="panel-body">
-
             <div class="form-horizontal container">
-
                 <div class="form-column col-lg-12 col-md-12 col-sm-12">
-
                     <div class="form-group">
                         <div class="col-sm-12">
                             <table class="table">
                                 <tr>
                                     <td>
-
                                         <div class="form-group">
                                             <span><b>Message Details: </b></span>
                                             @foreach (var item in Model.Messages)
@@ -118,10 +119,12 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                                                 {
 
                                                     @item.MessageToPost
+
+
                                                 }
-                                        
-                                    }
-</div>
+
+                                            }
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -143,7 +146,6 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                                             <div class="col-sm-9">
                                                 @Html.TextAreaFor(p => p.Reply.ReplyMessage, new { @rows = 2, @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.Reply.ReplyMessage)
-
                                             </div>
                                             <div class="col-sm-1">
                                                 <input type="submit" class="btn btn-primary btn-success" value="Reply" id="btn-reply-message">
@@ -152,7 +154,6 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                                     </div>
                                 </tr>
                             </table>
-
                             <h4>Replies for the Message</h4>
                             <table class="table">
                                 @foreach (var item in Model.Replies)
@@ -161,7 +162,6 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                                     {
                                         <tr>
                                             <td>
-
                                                 <div>
                                                     <span><b>Reply Message : </b></span>
                                                     @item.ReplyMessage
@@ -177,23 +177,18 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                                                     @item.ReplyDateTime
                                                 </div>
                                             </td>
-
                                         </tr>
                                     }
                                 }
-
                             </table>
-
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
     <!-- start panel-->
 
-    
+
 } 
