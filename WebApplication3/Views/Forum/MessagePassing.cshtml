@@ -1,4 +1,24 @@
-﻿@model WebApplication3.ModelV.MessageReplyViewModel
+﻿@{
+    ViewBag.Title = "Forum";
+    if (Session["UserLoggedIn"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+    }
+    else if (Session["AdminLoggedIn"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (Session["DoctorLoggedIn"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+@model WebApplication3.ModelV.MessageReplyViewModel
 @using PagedList;
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -31,7 +51,62 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
 
     };
 </script>
-<h2>MessagePassing</h2>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+    }
+
+        .alert.success {
+            background-color: #4CAF50;
+        }
+
+        .alert.info {
+            background-color: #2196F3;
+        }
+
+        .alert.warning {
+            background-color: #ff9800;
+        }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .closebtn:hover {
+            color: black;
+        }
+</style>
+@{
+    if (TempData["WarningMessage"] != null)
+    {
+        <h2>Alert Messages</h2>
+        <div class="alert">
+            <span class="closebtn">&times;</span>
+            <strong>@TempData["WarningMessage"]</strong>
+        </div>
+
+
+    }
+
+}
+<h3>Forum</h3>
+
+<input id="Button1" type="button" style="width:500px" value="Create new Post" onclick="location.href='@Url.Action("Create","Forum")'" />
 
 <div class="form-group">
     @using (Html.BeginForm("DeleteMessage", "Forum", FormMethod.Post, new { @id = "form-message-delete", @class = "form-horizontal container" }))
@@ -66,11 +141,12 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                             <div class="text">@m.DatePosted.ToString("dd/MM/yyyy")</div>
                         </td>
                         <td>
-                            @Html.ActionLink("View Reply", "MessagePassing", new { Id = m.Id })
+                            @Html.ActionLink("View Post", "MessagePassing", new { Id = m.Id })
                         </td>
                         <td>
                             <div class="text edit">
-                                <a class="delete" href="#" title="delete" onclick="messageDelete(@m.Id)"><img style="width: 17px; height: 15px" src="~/images/no.png"/></a>
+                                @Html.ActionLink("Delete", "DeleteMessage", new { Id = m.Id })
+                                <!-- <a class="delete" href="#" title="delete" onclick="messageDelete(@m.Id)"><img style="width: 17px; height: 15px" src="~/images/no.png" onclick="messageDelete(@m.Id)  /></a>-->
                             </div>
                         </td>
                         <td><input type="hidden" id="messageId" name="messageId" value="@m.Id"></td>
@@ -83,18 +159,23 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
         </div>
     }
 </div>
-<span><b>Message Details: </b></span>
+<span>
+    <h3 class="panel-title">
+        Message Details:
+   </h3>
+</span>
 @foreach (var item in Model.Messages)
 {
     if (item.Id == ViewBag.MessageId)
     {
 
-        @item.MessageToPost
+<h5>  @item.MessageToPost </h5>
 
 
     }
 
 }
+<br />
 @if (Model.Replies != null && ViewBag.MessageId != null)
 {
     <div class="panel panel-default">
@@ -108,53 +189,8 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                 <div class="form-column col-lg-12 col-md-12 col-sm-12">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <span><b>Message Details: </b></span>
-                                            @foreach (var item in Model.Messages)
-                                            {
-                                                if (item.Id == ViewBag.MessageId)
-                                                {
 
-                                                    @item.MessageToPost
-
-
-                                                }
-
-                                            }
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <div class="form-group">
-                                        @using (Html.BeginForm("ReplyMessage", "Forum", new { id = "form-reply-message", @class = "form-horizontal", messageId = @ViewBag.MessageId }, FormMethod.Post))
-                                        {
-
-                                            if (!ViewData.ModelState.IsValid)
-                                            {
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-md-4 col-sm-4"></div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                                        @Html.ValidationSummary(true)
-                                                    </div>
-                                                </div>
-                                            }
-                                            @Html.HiddenFor(model => model.Reply.MessageId);
-                                            <label class="col-sm-2 ">Reply</label>
-                                            <div class="col-sm-9">
-                                                @Html.TextAreaFor(p => p.Reply.ReplyMessage, new { @rows = 2, @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.Reply.ReplyMessage)
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <input type="submit" class="btn btn-primary btn-success" value="Reply" id="btn-reply-message">
-                                            </div>
-                                        }
-                                    </div>
-                                </tr>
-                            </table>
-                            <h4>Replies for the Message</h4>
+                            
                             <table class="table">
                                 @foreach (var item in Model.Replies)
                                 {
@@ -180,6 +216,35 @@ Page @ViewBag.PageNumber of @ViewBag.TotalPages
                                         </tr>
                                     }
                                 }
+                            </table>
+                            <table class="table">
+                                
+                                <tr>
+                                    <div class="form-group">
+                                        @using (Html.BeginForm("ReplyMessage", "Forum", new { id = "form-reply-message", @class = "form-horizontal", messageId = @ViewBag.MessageId }, FormMethod.Post))
+                                        {
+
+                                            if (!ViewData.ModelState.IsValid)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8">
+                                                        @Html.ValidationSummary(true)
+                                                    </div>
+                                                </div>
+                                            }
+                                            @Html.HiddenFor(model => model.Reply.MessageId);
+                                           
+                                            <div class="col-sm-9">
+                                                @Html.TextAreaFor(p => p.Reply.ReplyMessage, new { @rows = 2, @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Reply.ReplyMessage)
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <input type="submit" class="btn btn-primary btn-success" value="Post Reply" id="btn-reply-message">
+                                            </div>
+                                        }
+                                    </div>
+                                </tr>
                             </table>
                         </div>
                     </div>

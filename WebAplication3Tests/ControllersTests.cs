@@ -22,7 +22,7 @@ namespace WebAplication3Tests
     [TestClass]
     public class ControllersTests
     {
-        /*
+        
         [TestMethod]
         public void verigyPatient()
         {
@@ -34,11 +34,55 @@ namespace WebAplication3Tests
             var result = controller.verifyPatient("user1");
 
             //assert
-            //Assert.IsNotNull(result);
-            Assert.Fail();
+            Assert.IsNotNull(result);
+            //Assert.Fail();
 
         }
-        */
+        
+        [TestMethod]
+        public void ForumMessage()
+        {
+
+            //arrange
+            ForumController controller = new ForumController();
+            //controller.Session["DoctorLoggedIn"] = "doc1";
+            //act
+            ViewResult result = controller.MessagePassing(1,2) as ViewResult;
+
+
+            //assert
+            Assert.IsNotNull(result);
+
+        }
+        [TestMethod]
+        public void ForumBag()
+        {
+            
+            //arrange
+            ForumController controller = new ForumController();
+            //controller.Session["DoctorLoggedIn"] = "doc1";
+            //act
+            ViewResult result = controller.Create() as ViewResult;
+
+
+            //assert
+            Assert.AreEqual(null, result.ViewBag.Title);
+
+        }
+        [TestMethod]
+        public void Forum()
+        {
+            //arrange
+            ForumController controller = new ForumController();
+
+            //act
+            ViewResult result = controller.Create() as ViewResult;
+
+            //assert
+            Assert.IsNotNull(result);
+
+
+        }
         [TestMethod]
         public void ShowHomePage()
         {
@@ -79,7 +123,7 @@ namespace WebAplication3Tests
             ViewResult result = controller.About() as ViewResult;
             
             //assert
-            Assert.IsNotNull(result);
+            Assert.IsNull(result);
 
             
         }

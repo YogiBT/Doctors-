@@ -15,7 +15,7 @@ namespace WebApplication3.DAL
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<QueueDAL>(null);
+            Database.SetInitializer<MessageDAL>(null);
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Message>().ToTable("tblMessage");
         }

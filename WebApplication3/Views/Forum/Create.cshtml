@@ -1,9 +1,25 @@
 ﻿
 @model WebApplication3.ModelV.MessageReplyViewModel
 @{
-    ViewBag.Title = "Crate";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create";
+    if (Session["UserLoggedIn"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+    }
+    else if (Session["AdminLoggedIn"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (Session["DoctorLoggedIn"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }
+
 <div class="row">
     <div class="col-12">
         <div class="row-fluid">
@@ -27,10 +43,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Subject</label>
                                     <div class="col-sm-8">
-
                                         @Html.TextBoxFor(p => p.Message.Subject, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Message.Subject)
-
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -53,6 +67,4 @@
             </div>
         </div>
     </div>
-
 </div>
-

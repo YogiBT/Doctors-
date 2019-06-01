@@ -35,10 +35,53 @@ namespace WebApplication3.Controllers
             base.OnActionExecuted(filterContext);
         }
 
-       
+
+        public ActionResult DeleteMessage(int? Id)
+        {
+            int? num;
+            num = Id;
+
+            if (Session["AdminLoggedIn"] != null) {
+
+                MessageDAL msgDAL = new MessageDAL();
+                ReplyDAL rplDAL = new ReplyDAL();
+                try { 
+                    List<Message> msg = (from x in msgDAL.MessagesDal where x.Id==num select x).ToList<Message>();
+                    Message msgToDelete = msg[0];
+                    msgDAL.MessagesDal.Attach(msgToDelete);
+                    msgDAL.MessagesDal.Remove(msgToDelete);
+                    msgDAL.SaveChanges();
 
 
-        public ActionResult MessagePassing(int? Id, int? page)
+                    List<Reply> rpl = (from x in rplDAL.Replies where x.MessageId==num select x).ToList<Reply>();
+                    foreach (var rplToDelete in rpl)
+                    {
+                        rplDAL.Replies.Attach(rplToDelete);
+                        rplDAL.Replies.Remove(rplToDelete);
+                        rplDAL.SaveChanges();
+                    }
+
+
+                }catch(Exception e){ }
+
+
+
+            }
+
+
+            else
+            {
+                TempData["WarningMessage"] = "Only Admin can delete posts.";
+                return RedirectToAction("MessagePassing", "Forum");
+            }
+            
+
+
+            return RedirectToAction("MessagePassing", "Forum");
+
+        }
+
+            public ActionResult MessagePassing(int? Id, int? page)
         {
             int pageSize = 5;
             int pageNumber = (page ?? 1);

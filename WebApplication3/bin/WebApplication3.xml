@@ -235,5 +235,11 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
+        <member name="M:WebApplication3.DAL.UserReviewDAL.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            Create a connection to queue DB.
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
     </members>
 </doc>

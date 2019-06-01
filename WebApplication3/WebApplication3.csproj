@@ -218,6 +218,7 @@
     <Compile Include="DAL\ReplyDAL.cs" />
     <Compile Include="DAL\TermsDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
+    <Compile Include="DAL\UserReviewDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,9 +228,11 @@
     <Compile Include="Models\Queue.cs" />
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserReview.cs" />
     <Compile Include="Models\uTerms.cs" />
     <Compile Include="ModelV\MessageReplyViewModel.cs" />
     <Compile Include="ModelV\VMAdmin.cs" />
+    <Compile Include="ModelV\VMReviews.cs" />
     <Compile Include="ModelV\VMUsersDoctors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModelV\VMAdminUser.cs" />
@@ -348,6 +351,7 @@
     <Content Include="Views\Forum\MessagePassing.cshtml" />
     <Content Include="Views\Forum\Test.cshtml" />
     <Content Include="Views\Forum\Create.cshtml" />
+    <Content Include="Views\Doctor\AddReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

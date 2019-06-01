@@ -795,3 +795,5 @@ D:\docTest\Doctors--master\WebAplication3Tests\obj\Debug\WebAplication3Tests.csp
 D:\docTest\Doctors--master\WebAplication3Tests\obj\Debug\WebAplication3Tests.csproj.CopyComplete
 D:\docTest\Doctors--master\WebAplication3Tests\obj\Debug\WebAplication3Tests.dll
 D:\docTest\Doctors--master\WebAplication3Tests\obj\Debug\WebAplication3Tests.pdb
+D:\docTest\Doctors--master\WebAplication3Tests\obj\Debug\WebAplication3Tests.Properties.Resources.resources
+D:\docTest\Doctors--master\WebAplication3Tests\obj\Debug\WebAplication3Tests.csproj.GenerateResource.cache
