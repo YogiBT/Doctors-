@@ -115,33 +115,67 @@ namespace WebApplication3.Controllers
         /// <param name="date"></param>
         /// <param name="did"></param>
         /// <returns></returns>
-        public ActionResult QueueSelect(DateTime date,string did) // add the patient (update) turn to queue
+        public ActionResult QueueSelect(DateTime date, string did) // add the patient (update) turn to queue
         {
             //Session["UserLoggedID"]
             if (verifyUser() == false)
             {
+                /*
+                 * verifing current user
+                 */
                 TempData["WarningMessage"] = "Don't go to places you are not allowed.";
                 return RedirectToAction("LogOut", "Home");
             }
+            /*
+             * Create the connection to DB.Queue
+             * and make an object with current data
+             */
+            QueueDAL tempDAL = new QueueDAL();
             Queue queTemp = new Queue();
             queTemp.date = date;
             queTemp.DID = did;
             queTemp.PID = Session["UserLoggedIn"].ToString();
             queTemp.mode = false;
 
-            using(var db=new QueueDAL())
+            using (var db = new QueueDAL())
             {
-                db.Queues.Attach(queTemp);
-                db.Entry(queTemp).Property(x => x.PID).IsModified = true;
-                db.Entry(queTemp).Property(x => x.mode).IsModified = true;
-                db.SaveChanges();
+                try
+                {
+                    /*
+                     * We're looking to see if there is a line of data with 'mode'==0 with current DID and date
+                     */
+                    List<Queue> queueTemp = (from x in tempDAL.Queues where x.mode.Equals(false) && x.date.Equals(date) && x.DID.Equals(did) select x).ToList<Queue>();
+                    if (queueTemp.Count() == 0)
+                    {
+                        /*
+                         * if there isn't a taken line-->update the DB (transaction completed)
+                         */
+                        db.Queues.Attach(queTemp);
+                        db.Entry(queTemp).Property(x => x.PID).IsModified = true;
+                        db.Entry(queTemp).Property(x => x.mode).IsModified = true;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        /*
+                         * Else show error message
+                         */
+                        TempData["WarningMessage"] = "Error selecting the Queue,please try again.";
+                        return RedirectToAction("ViewAppointments", "User");
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    /*
+                     * Error message in case of failed connection
+                     */
+                    TempData["WarningMessage"] = e;
+                    return RedirectToAction("ViewAppointments", "User");
+
+                }
 
             }
-
-
-            //que.Queues.Add(queTemp);
-            //que.SaveChanges();
-
 
             return RedirectToAction("ViewAppointments", "User");
         }

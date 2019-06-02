@@ -99,25 +99,34 @@
                         @Html.TextBoxFor(m => m.LastName) @Html.ValidationMessageFor(x => x.LastName)
                     </td>
                     <td>
-                        <i>ID</i>
+                        <i>ID~~</i>
                         @Html.TextBoxFor(m => m.ID) @Html.ValidationMessageFor(x => x.ID)
                     </td>
                     <td>
                         <i>Phone</i>
                         @Html.TextBoxFor(m => m.Phone) @Html.ValidationMessageFor(x => x.Phone)
                     </td>
+                    
+                    
+                </tr>
+                <tr>
                     <td>
-                        <i>Age</i>
+                        
+                        <i>Age   ~~~~</i>
                         @Html.TextBoxFor(m => m.Age) @Html.ValidationMessageFor(x => x.Age)
                     </td>
+                    
                     <td>
-                        <i>Password</i>
+                        <i>Password~</i>
                         @Html.TextBoxFor(m => m.Password) @Html.ValidationMessageFor(x => x.Password)
                     </td>
                     <td>
                         <i>Email</i>
                         @Html.TextBoxFor(m => m.Email) @Html.ValidationMessageFor(x => x.Email)
                     </td>
+                    
+                </tr>
+                <tr>
                     <td>
                         @Html.MathCaptcha()
                         <p> @ViewBag.ErrorMessage </p>

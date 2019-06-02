@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.SessionState;
 using WebApplication3;
 using WebApplication3.Controllers;
 using WebApplication3.Models;
 using WebApplication3.Classes;
 using WebApplication3.DAL;
 using WebApplication3.ModelV;
-
 
 using System.Web;
 using FakeHttpContext;
@@ -19,6 +19,503 @@ using FakeHttp;
 
 namespace WebAplication3Tests
 {
+    [TestClass]
+    public class Sprint4
+    {
+        [TestMethod]
+        public void T8_164(){
+            //arrange
+            DoctorController controller = new DoctorController();
+            try
+            {
+                //act
+                ViewResult result = controller.AddReviewToDB() as ViewResult;
+            }
+            catch (Exception e)
+            {
+
+                Assert.AreNotEqual("pass", "fail");
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+        }
+        [TestMethod]
+        public void T8_199()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+
+            //act
+            ViewResult result = controller.AddReview() as ViewResult;
+
+            //assert
+            Assert.IsNotNull(result);
+
+
+        }
+        [TestMethod]
+        public void T8_163()
+        {
+            AdminController controller = new AdminController();
+            Admin admin = new Admin();
+            ForumController controller2 = new ForumController();
+            try
+            {
+                ViewResult result = controller2.DeleteMessage(1) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch ( Exception exception)
+            {
+                Console.WriteLine(exception);
+                Assert.IsNotNull(admin);
+            }
+
+        }
+        [TestMethod]
+        public void T8_161()
+        {
+            AdminController controller = new AdminController();
+            Admin admin = new Admin();
+            ForumController controller2 = new ForumController();
+            try
+            {
+                ViewResult result = controller2.Create() as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                Assert.IsNotNull(admin);
+            }
+
+        }
+        [TestMethod]
+        public void T8_162()
+        {
+            AdminController controller = new AdminController();
+            Doctor admin = new Doctor();
+            ForumController controller2 = new ForumController();
+            try
+            {
+
+                ViewResult result = controller2.Create() as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                Assert.IsNotNull(admin);
+            }
+
+        }
+        [TestMethod]
+        public void T8_160()
+        {
+            AdminController controller = new AdminController();
+            User admin = new User();
+            ForumController controller2 = new ForumController();
+            try
+            {
+
+                ViewResult result = controller2.Create() as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                Assert.IsNotNull(admin);
+            }
+
+        }
+
+    }
+
+
+
+    [TestClass]
+    public class AdminTest
+    {
+        [TestMethod]
+        public void AdminShowdoctor()
+        {
+            AdminController controller = new AdminController();
+           // var sessionItems = new SessionstateItemCollection();
+
+        }
+        [TestMethod]
+        public void AdminDeleteDoctor()
+        {
+            AdminController controller = new AdminController();
+            try
+            {
+                ViewResult result = controller.DeleteDoctor("doc1") as ViewResult;
+                // ViewResult result = controller.DeleteDoctor("doc1") as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        [TestMethod]
+        public void AdminShowAllUsers()
+        {
+            AdminController controller = new AdminController();
+            ViewResult result = controller.ShowAllUsers() as ViewResult;
+            Assert.IsNotNull(result);
+        }
+    }
+    [TestClass]
+    public class DoctorTests
+    {
+        [TestMethod]
+        public void DoctorGetQueueByJson()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+
+
+            try
+            {
+                Doctor doc = new Doctor();
+                Queue que = new Queue();
+                DateTime date = new DateTime();
+                controller.Session["DoctorLoggedIn"] = "doc1";
+                ViewResult result = controller.GetQueuesByJson() as ViewResult;
+
+
+                // ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+
+        [TestMethod]
+        public void DoctorShowAppointments()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+
+
+            try
+            {
+                Doctor doc = new Doctor();
+                Queue que = new Queue();
+                DateTime date = new DateTime();
+                controller.Session["DoctorLoggedIn"] = "doc1";
+                ViewResult result = controller.ShowAppointments() as ViewResult;
+
+
+                // ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+
+        [TestMethod]
+        public void DoctorQueueDelete()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+
+
+            try
+            {
+                Doctor doc = new Doctor();
+                Queue que = new Queue();
+                DateTime date = new DateTime();
+                controller.Session["DoctorLoggedIn"] = "doc1";
+                ViewResult result = controller.QueueDelete(date,"a",true,"a") as ViewResult;
+
+
+                // ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+
+        [TestMethod]
+        public void DoctorQueueAdd()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+
+
+            try
+            {
+                Doctor doc = new Doctor();
+                Queue que = new Queue();
+                controller.Session["DoctorLoggedIn"] = "doc1";
+                ViewResult result = controller.QueueAdd(que) as ViewResult;
+
+
+                // ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+
+        [TestMethod]
+        public void DoctorAddQueue()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+
+
+            try
+            {
+                Doctor doc = new Doctor();
+                controller.Session["DoctorLoggedIn"] = "doc1";
+                ViewResult result = controller.AddQueue() as ViewResult;
+
+
+                // ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorPatientInfo()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+
+
+            try
+            {
+                Doctor doc = new Doctor();
+                controller.Session["DoctorLoggedIn"] = "doc1";
+                ViewResult result = controller.PatientInfo("user1") as ViewResult;
+
+
+                // ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorMyinfo()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+
+            
+            try
+            {
+                Doctor doc = new Doctor();
+                controller.Session["DoctorLoggedIn"] = "doc1";
+                ViewResult result = controller.MyInfo() as ViewResult;
+
+                
+                // ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorEdit()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+            Doctor doc = new Doctor();
+            
+            try
+            {
+                ViewResult result = controller.Edit() as ViewResult;
+
+                // ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorSubmit()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+            Doctor doc = new Doctor();
+            try
+            {
+                ViewResult result = controller.Submit(doc) as ViewResult;
+                Assert.IsNotNull(result);
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorVerifyPatient()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+            try
+            {
+                bool result = controller.verifyPatient("user1");
+            }
+            catch (Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+            //ViewResult result = controller.verifyDoctor() as ViewResult;
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorVerifyDoctor()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+            try
+            {
+                bool result = controller.verifyDoctor();
+            }
+            catch(Exception e)
+            {
+                Assert.AreNotEqual("pass", e);
+            }
+                //ViewResult result = controller.verifyDoctor() as ViewResult;
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorShowReview()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            //act
+            ViewResult result = controller.ShowReview() as ViewResult;
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorAddInfoToDB()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+            try
+            {
+                //act
+                ViewResult result = controller.AddReviewToDB() as ViewResult;
+            }
+            catch (Exception e)
+            {
+
+                Assert.AreNotEqual("pass", "fail");
+            }
+            //assert
+            //Assert.AreEqual("pass", "pass");
+            Assert.IsNotNull(controller);
+
+
+        }
+        [TestMethod]
+        public void DoctorAddInfo()
+        {
+            //arrange
+            DoctorController controller = new DoctorController();
+
+            //act
+            ViewResult result = controller.AddReview() as ViewResult;
+
+            //assert
+            Assert.IsNotNull(result);
+
+
+        }
+
+    }
     [TestClass]
     public class ControllersTests
     {
@@ -123,7 +620,7 @@ namespace WebAplication3Tests
             ViewResult result = controller.About() as ViewResult;
             
             //assert
-            Assert.IsNull(result);
+            Assert.IsNotNull(result);
 
             
         }

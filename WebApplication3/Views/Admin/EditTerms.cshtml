@@ -1,0 +1,18 @@
+﻿@model WebApplication3.Models.uTerms
+
+@{
+    ViewBag.Title = "EditTerms";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>EditTerms</h2>
+
+
+<div>
+    @using (Html.BeginForm("EditTerms", "Admin", FormMethod.Post))
+    {
+        <i>Edit Terms</i>
+        @Html.TextBoxFor(m => m.UserTerms)
+        <input id="Submit1" type="submit" value="Add Terms" />
+    }
+</div>

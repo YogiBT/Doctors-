@@ -352,6 +352,7 @@
     <Content Include="Views\Forum\Test.cshtml" />
     <Content Include="Views\Forum\Create.cshtml" />
     <Content Include="Views\Doctor\AddReview.cshtml" />
+    <Content Include="Views\Admin\EditTerms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

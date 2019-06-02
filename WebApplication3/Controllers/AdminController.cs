@@ -225,5 +225,25 @@ namespace WebApplication3.Controllers
                 return true;
             return false;
         }
+        public ActionResult EditTerms(uTerms uterms)
+        {
+            if (ModelState.IsValid)
+            {
+                TermsDAL termDal = new TermsDAL();
+                try
+                {
+                    termDal.theTerms.Add(uterms);
+                    termDal.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    //Failed insertion,already exist  
+
+                    termDal.theTerms.Remove(uterms);
+                    return View("EditTerms", uterms);
+                }
+            }
+            return RedirectToAction("About", "Home");
+        }
     }
 }
